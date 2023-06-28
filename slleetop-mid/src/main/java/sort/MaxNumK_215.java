@@ -5,18 +5,22 @@ package sort;
  * @description: 查找数组中第K个最大的元素
  * @author: shileilei
  * @date: 2023-06-28 09:38
- * 核心思想：大顶堆，堆排序
+ * 核心思想：大顶堆，堆排序 复杂度klogn
+ * 1.怎么初始化堆？从最后一个非叶子结点的计算是关键 n/2-1，然后循环向上，第一次初始化堆，符合堆得特性
+ * 2.怎么调整堆？左孩子是2n+1,右孩子是2n+2，比较根节点和子节点的最大值，交换并循环向上继续完成整个树的排序
+ * 3.怎么取走最大值，且继续堆排序？要么交换到尾部，要么直接用尾部覆盖最大值k-1次，最后查询数组第0个数，更关键的是排序的大小要逐次递减
  **/
 public class MaxNumK_215 {
 
     public static int findKthLargest(int[] nums, int k){
-        int n = nums.length;
+        int heapSize = nums.length;
         //构建大顶堆
-        buildHeap(nums, n);
-        //剔除k-1个顶节点
+        buildHeap(nums, heapSize);
+        //剔除k-1个根节点
         for (int i =0; i<k-1;i++){
-            nums[0] =nums[n-1];
-            adjustHeap(nums,0, n-1);
+            nums[0] =nums[heapSize-1];
+            --heapSize;
+            adjustHeap(nums,0, heapSize);
         }
         //返回第k个最大元素
         return nums[0];
@@ -54,7 +58,7 @@ public class MaxNumK_215 {
 
 
     public static void main(String[] args) {
-        int[] nums = { 6, 3, 8, 2, 9, 1 ,9};
+        int[] nums = {-1,2,0,5,4,6,5,6,9};
         int k = 3;
         int kthLargest = findKthLargest(nums, k);
         System.out.println("第" + k + "最大的数是：" + kthLargest);
