@@ -1,10 +1,9 @@
 package linklist;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 
 /**
@@ -13,15 +12,15 @@ import org.mockito.MockitoAnnotations;
  * @author: shileilei
  * @date: 2023-07-03 20:21
  **/
+@RunWith(PowerMockRunner.class)
+public class ReverseKGroup_25Test {
 
-class ReverseKGroup_25Test {
 
-
-    @Mock
+    @InjectMocks
     private ReverseKGroup_25 reverseKGroup_25;
 
     @Test
-    void reverseKGroup() {
+    public void reverseKGroup() {
         Integer[] testArr = {1,2,3,4,5,6};
         ReverseKGroup_25.ListNode testNode = new ReverseKGroup_25.ListNode();
         ReverseKGroup_25.ListNode temp = testNode;
@@ -35,10 +34,5 @@ class ReverseKGroup_25Test {
             System.out.println(result.val);
             result = result.next;
         }
-    }
-
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
     }
 }
