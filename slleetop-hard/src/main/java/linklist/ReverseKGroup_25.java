@@ -58,13 +58,37 @@ public class ReverseKGroup_25 {
         return newNode.next;
     }
 
-    private  void cutKListNode(ListNode head, int k){
+    private void cutKListNode(ListNode head, int k){
         while(head != null){
             subListNodes.add(head);
             int index = listNodeMap.get(head);
             head = listNodeMapR.get(index+k);
         }
     }
+
+    public ListNode reverseKGroup_v2(ListNode head, int k){
+        ListNode pHead = new ListNode(-1, head);
+        ListNode pre = pHead;
+        while(true){
+            ListNode last =  pre.next;
+            for(int i=0;i<k;i++){
+                if (last== null){
+                    return pHead.next;
+                }
+                last = last.next;
+            }
+            ListNode cur = pre.next;
+            for (int j=0;j<k-1;j++){
+                ListNode next = cur.next;
+                cur.next = next.next;
+                next.next = pre.next;
+                pre.next = next;
+            }
+            pre = cur;
+        }
+    }
+
+
     public static class ListNode {
         int val;
         ListNode next;
