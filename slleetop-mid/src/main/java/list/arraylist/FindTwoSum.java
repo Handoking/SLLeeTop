@@ -12,16 +12,14 @@ import java.util.Map;
 public class FindTwoSum {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> keyIndexMap = new HashMap<>();
-        for (int i=0;i<nums.length;i++){
-            keyIndexMap.put(nums[i],i);
-        }
-
         int[] result = new int[2];
-        for(int i: keyIndexMap.keySet()){
-            if (keyIndexMap.containsKey(target-i)){
-                result[0] =i;
-                result[1] = nums[keyIndexMap.get(i)];
+        for(int i=0;i<nums.length;i++){
+            if(keyIndexMap.containsKey(target-nums[i])){
+                result[0] = i;
+                result[1] = keyIndexMap.get(target-nums[i]);
+                return result;
             }
+            keyIndexMap.put(nums[i], i);
         }
         return result;
     }
