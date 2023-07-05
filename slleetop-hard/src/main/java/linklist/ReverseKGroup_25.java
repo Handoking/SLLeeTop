@@ -10,11 +10,18 @@ import java.util.Map;
  * @description: K个一组反转链表
  * @author: shileilei
  * @date: 2023-07-03 15:20
+ *
+ * 核心思想：
+ * 分每k个节点翻转一次，如果少于k个节点不反转
+ * 在一条链上进行节点移动
  **/
 public class ReverseKGroup_25 {
 
     private  Map<ListNode, Integer> listNodeMap  = new HashMap<>();
     private  Map<Integer,ListNode>listNodeMapR = new HashMap<>();
+    /**
+     * 存放每k段头尾的映射，为了再次连接
+     */
     private  Map<ListNode, ListNode> listNodeMapTail = new HashMap<>();
     private  List<ListNode> subListNodes = new ArrayList<>();
     public  ListNode reverseKGroup(ListNode head, int k) {
@@ -44,6 +51,12 @@ public class ReverseKGroup_25 {
     }
 
 
+    /**
+     * 反转链表
+     * @param listNode
+     * @param k
+     * @return
+     */
     private  ListNode reverseListNode(ListNode listNode,Integer k){
         ListNode newNode = new ListNode(-1);
         int currentIndex = listNodeMap.get(listNode);
@@ -58,6 +71,11 @@ public class ReverseKGroup_25 {
         return newNode.next;
     }
 
+    /**
+     * 切链表为每k一段
+     * @param head
+     * @param k
+     */
     private void cutKListNode(ListNode head, int k){
         while(head != null){
             subListNodes.add(head);
